@@ -1,5 +1,6 @@
 class RegistrationsController < Devise::RegistrationsController
-  
+  before_filter :configure_permitted_parameters, only: :create
+      
   def new
     super
   end
@@ -12,22 +13,14 @@ class RegistrationsController < Devise::RegistrationsController
     render json: {html: html }
   end
 
-  def create
-    build_resource(sign_up_params) if resource.blank?
+  def check_email
+    result = User.where('email=?', params[:email]).blank?
+    render json: result 
+  end
 
-    if resource.valid?
-      @user = resource
-      if params[:user_type].blank?
-        user_type_html = render_to_string(partial: 'user_type')
-      else
-        @klass = (Object.const_get params[:user_type]).new
-        render 'artists/artist_details' if @klass.is_a?Artist
-        render 'bands/band_details' if @klass.is_a?Band
-        render 'clients/client_details' if @klass.is_a?Client
-      end
-    else
-      render 'new'
-    end
+  def create
+    super
+  end
 
 
 
@@ -54,10 +47,19 @@ class RegistrationsController < Devise::RegistrationsController
     end
 =end
 
-  end
-
-
   def update
     super
   end
+
+  protected
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.for(:sign_up) do |u|
+      u.permit(:email, :password, artist_attributes: [:full_name, :zip, :music_genre, :country_id])
+    end
+    devise_parameter_sanitizer.for(:account_update) do |u|
+      u.permit(:email, :password, :current_password)
+    end
+  end
+
 end 

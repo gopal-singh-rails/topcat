@@ -3,28 +3,29 @@
   <%= devise_error_messages! %>
   <div class='first-step'>
     <div class="field">
-      <%= f.label :email %><br />
+      <br />
+      <%= f.label :email %>
       <%= f.email_field :email, autofocus: true, id: 'email' %>
     </div>
     <div class="field">
+      <br/>
       <%= f.label :password %>
-      <% if @validatable %>
-        <em>(<%= @minimum_password_length %> characters minimum)</em>
-      <% end %><br />
+      
       <%= f.password_field :password, autocomplete: "off", id: 'password' %>
     </div>
     <div class="actions"></div>
   </div>
 
-  <div class='second-step hide'>
+  <div class='second-step display-none'>
     <a href="#" class='btn btn-primary user-type', data-value='artist'>Artist <%= radio_button_tag 'user_type', 'Artist'%></a>
     <a href="#" class='btn btn-primary user-type', data-value='band'>Band <%= radio_button_tag 'user_type', 'Band'%></a>
     <a href="#" class='btn btn-primary user-type', data-value='client'>Client <%= radio_button_tag 'user_type', 'Client'%></a>
     <a href="#" class="back_link">« Edit Login Information</a>
+    <%= hidden_field_tag :user_role, id: "user_role" %>
   </div>
 
-  <div class='third-step'></div>
-  
+  <div class='third-step display-none'></div>
+  <%= button_tag "Continue", id: "continue" %>
   <%= f.submit "Sign up", class: 'sign-up-submit' %>
 <% end %>
 <%= render "devise/shared/links" %>

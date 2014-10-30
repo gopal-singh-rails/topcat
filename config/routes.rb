@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   devise_scope :user do
     get "registrations/user_details" => "registrations#user_details"
+    get 'check_email' => "registrations#check_email"
   end
 
   get 'welcome/index'

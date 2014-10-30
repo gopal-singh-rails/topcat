@@ -1,8 +1,32 @@
 <div class="field">
-  Email
-  <%= text_field_tag :full_name, '', name: 'artist[:full_name]' %><br />
-  Genre <%=select_tag "genre", '<option>abc</option><option>bcd</option>'.html_safe, name: 'artist[:genre]'  %>
-  Country <%=select_tag "country", '<option>india</option><option>usa</option>'.html_safe, name: 'artist[:country]' %>
-  Zip<%= text_field_tag :zip, '', name: 'artist[:zip]' %><br />
+  Full Name
+  <%= text_field_tag :full_name, '', name: 'user[artist_attributes][full_name]' %><br />
+  Genre <%=select_tag "music_genre", '<option>abc</option><option>bcd</option>'.html_safe, name: 'user[artist_attributes][music_genre]'  %>
+  Country <%=select_tag "country", '<option>india</option><option>usa</option>'.html_safe, name: 'user[artist_attributes][country_id]' %>
+  Zip<%= text_field_tag :zip, '', name: 'user[artist_attributes][zip]' %><br />
   Term and Condition <%= check_box_tag :accept%><br />
 </div>
+
+<script>
+  $("#full_name").rules('add', {
+    required: true,
+    messages: {
+      required: "Enter Full Name"
+    }
+  });
+
+  $("#zip").rules('add', {
+    required: true,
+    messages: {
+        required: "Enter Zip Code"
+    }
+  });
+
+  $("#accept").rules('add', {
+    required: true,
+    messages: {
+      required: "Please Accept Terms & Conditions"
+    }
+  });
+
+</script>

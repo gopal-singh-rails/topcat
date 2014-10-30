@@ -6,5 +6,7 @@ class User < ActiveRecord::Base
   has_one :artist
   has_one :client
   has_one :band
+  accepts_nested_attributes_for :artist
+
   attr_accessor :steps
 end

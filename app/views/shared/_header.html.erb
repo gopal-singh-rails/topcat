@@ -25,8 +25,9 @@
              <li><a href="#" >Contact Us</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-             <li><%=link_to "Login", new_user_session_path %></li>
-             <li><%= link_to "Signup", new_user_registration_path, class: 'btn btn-primary' %></li>
+             <li><%=link_to "Login", new_user_session_path unless user_signed_in? %></li>
+             <li><%=link_to "Logout", destroy_user_session_path, method: "delete"  if user_signed_in? %></li>
+             <li><%= link_to "Signup", new_user_registration_path, class: 'btn btn-primary' unless user_signed_in? %></li>
            </ul>
         </div>  
      </div> 

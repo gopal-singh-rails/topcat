@@ -1,50 +1,56 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+$(document).on 'ready page:load', ->
 
+  $(".back_link").click (event) ->
+    $(".first-step").show()
+    $(".second-step").hide()
 
-ready = ->
-  #$('.sign-up-submit').click (event) ->
-    #event.preventDefault()
-    #$(this).parent('form').submit()
+  $("#continue").click (event) ->
+    $("#new_user").validate()
 
-  $('.back_link').click (event) ->
-    $('.first-step').show()
-    $('.second-step').addClass('hide')
-
-  $('.user-type').click (event) ->
+  $(".user-type").click (event) ->
+    user_type = $(this).data("value")
     $.ajax(
       type: "GET"
       url: "/registrations/user_details"
       data:
-        user_type: $(this).data('value')
+        user_type: user_type
     ).done (msg) ->
-      $('.third-step').html(msg.html)
-      $('.second-step').addClass('hide')
+      $(".third-step").html msg.html
+      $(".second-step").hide()
+      $(".third-step").show()
+      $("#user_role").val(user_type)
 
   $("#new_user").validate
     rules:
-      email:
+      "user[email]":
         required: true
         email: true
-      password:
+        remote:
+          url: "/check_email"
+          type: "get"
+          data:
+            email: ->
+              $("#email").val()
+
+      "user[password]":
         required: true
         minlength: 8
       agree: "required"
+
     messages:
-      password:
+      "user[password]":
         required: "Please provide a password"
         minlength: "Your password must be at least 8 characters long"
-
-      email:
+      "user[email]":
         required: "Please enter email"
         email: "Please enter a valid email address"
+        remote: "Email already exist"
       agree: "Please accept our policy"
 
     submitHandler: (form) ->
-      $('.first-step').hide()
-      $('.second-step').removeClass('hide')
-      return
-
-$(document).ready(ready)
-$(document).on('page:load', ready)
+      if $(".third-step").is(':hidden')
+        $(".first-step").hide()
+        $(".second-step").show()
+      else
+        form.submit()
+   
