@@ -1,0 +1,30 @@
+<h2 class='top-space'>Sign up</h2>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), novalidate: "novalidate")  do |f| %>
+  <%= devise_error_messages! %>
+  <div class='first-step'>
+    <div class="field">
+      <%= f.label :email %><br />
+      <%= f.email_field :email, autofocus: true, id: 'email' %>
+    </div>
+    <div class="field">
+      <%= f.label :password %>
+      <% if @validatable %>
+        <em>(<%= @minimum_password_length %> characters minimum)</em>
+      <% end %><br />
+      <%= f.password_field :password, autocomplete: "off", id: 'password' %>
+    </div>
+    <div class="actions"></div>
+  </div>
+
+  <div class='second-step hide'>
+    <a href="#" class='btn btn-primary user-type', data-value='artist'>Artist <%= radio_button_tag 'user_type', 'Artist'%></a>
+    <a href="#" class='btn btn-primary user-type', data-value='band'>Band <%= radio_button_tag 'user_type', 'Band'%></a>
+    <a href="#" class='btn btn-primary user-type', data-value='client'>Client <%= radio_button_tag 'user_type', 'Client'%></a>
+    <a href="#" class="back_link">« Edit Login Information</a>
+  </div>
+
+  <div class='third-step'></div>
+  
+  <%= f.submit "Sign up", class: 'sign-up-submit' %>
+<% end %>
+<%= render "devise/shared/links" %>

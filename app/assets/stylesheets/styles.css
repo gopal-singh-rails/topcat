@@ -101,6 +101,10 @@ textarea {
 }
 
 #main {
+ padding-top: 120px;
+}
+
+.top-space {
  padding-top:120px;
 }
 

@@ -1,0 +1,8 @@
+<div class="field">
+  Email
+  <%= text_field_tag :full_name, '', name: 'artist[:full_name]' %><br />
+  Genre <%=select_tag "genre", '<option>abc</option><option>bcd</option>'.html_safe, name: 'artist[:genre]'  %>
+  Country <%=select_tag "country", '<option>india</option><option>usa</option>'.html_safe, name: 'artist[:country]' %>
+  Zip<%= text_field_tag :zip, '', name: 'artist[:zip]' %><br />
+  Term and Condition <%= check_box_tag :accept%><br />
+</div>

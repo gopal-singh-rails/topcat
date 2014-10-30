@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
   devise_for :users, :controllers => {:registrations => "registrations"}
+
+  devise_scope :user do
+    get "registrations/user_details" => "registrations#user_details"
+  end
+
   get 'welcome/index'
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -25,8 +25,8 @@
              <li><a href="#" >Contact Us</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-             <li><a href="#">Login</a></li>
-             <li><a href="#" class='btn btn-primary'>Signup</a></li>
+             <li><%=link_to "Login", new_user_session_path %></li>
+             <li><%= link_to "Signup", new_user_registration_path, class: 'btn btn-primary' %></li>
            </ul>
         </div>  
      </div> 

@@ -4,23 +4,29 @@ class RegistrationsController < Devise::RegistrationsController
     super
   end
 
+  def user_details
+    @klass = (Object.const_get params[:user_type].classify).new
+    html = render_to_string(partial: 'artists/artist_details') if @klass.is_a?Artist
+    html = render_to_string(partial: 'bands/band_details') if @klass.is_a?Band
+    html = render_to_string(partial: 'clients/client_details') if @klass.is_a?Client
+    render json: {html: html }
+  end
+
   def create
-    build_resource(sign_up_params)
+    build_resource(sign_up_params) if resource.blank?
+
     if resource.valid?
-      resource.steps = resource.steps.blank? ? 1 : resource.steps + 1
+      @user = resource
+      if params[:user_type].blank?
+        user_type_html = render_to_string(partial: 'user_type')
+      else
+        @klass = (Object.const_get params[:user_type]).new
+        render 'artists/artist_details' if @klass.is_a?Artist
+        render 'bands/band_details' if @klass.is_a?Band
+        render 'clients/client_details' if @klass.is_a?Client
+      end
     else
       render 'new'
-    end
-
-    if resource.steps==1
-      render 'user_type'
-    end
-
-    if resource.steps==2
-      unless params[:user_type].blank?
-        klass = Object.const_get "Artist".new
-      end
-      render 'user_details'
     end
 
 
