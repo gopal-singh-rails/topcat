@@ -1,0 +1,31 @@
+<div class="field">
+  Band Name
+  <%= text_field_tag :band_name, '', name: 'user[band_attributes][band_name]' %><br />
+  Genre <%=select_tag "music_genre", '<option>abc</option><option>bcd</option>'.html_safe, name: 'user[band_attributes][music_genre]'  %>
+  Country <%= country_select("user", "country", {selected: "US"}, {name: 'user[band_attributes][country_id]'}) %>
+  Zip<%= text_field_tag :zip, '', name: 'user[band_attributes][zip]' %><br />
+  Term and Condition <%= check_box_tag :accept, 'yes', false, name: 'user[terms_of_service]' %><br />
+</div>
+
+<script>
+  $("#band_name").rules('add', {
+    required: true,
+    messages: {
+      required: "Enter Band Name"
+    }
+  });
+
+  $("#zip").rules('add', {
+    required: true,
+    messages: {
+        required: "Enter Zip Code"
+    }
+  });
+
+  $("#accept").rules('add', {
+    required: true,
+    messages: {
+      required: "Please Accept Terms & Conditions"
+    }
+  });
+</script>

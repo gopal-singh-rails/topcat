@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20141029164801) do
   create_table "artists", force: true do |t|
     t.string   "full_name"
     t.string   "music_genre"
-    t.integer  "country_id"
+    t.string   "country_id"
     t.string   "zip"
     t.integer  "user_id"
     t.datetime "created_at"
@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 20141029164801) do
   create_table "bands", force: true do |t|
     t.string   "band_name"
     t.string   "music_genre"
-    t.integer  "country_id"
+    t.string   "country_id"
     t.string   "zip"
     t.integer  "user_id"
     t.datetime "created_at"
@@ -39,7 +39,8 @@ ActiveRecord::Schema.define(version: 20141029164801) do
   create_table "clients", force: true do |t|
     t.string   "company_name"
     t.string   "company_email"
-    t.string   "offical_website"
+    t.string   "country_id"
+    t.string   "official_website"
     t.string   "zip"
     t.integer  "user_id"
     t.datetime "created_at"

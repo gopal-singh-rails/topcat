@@ -1,0 +1,52 @@
+<div class="field">
+  Company Name
+  <%= text_field_tag :company_name, '', name: 'user[client_attributes][company_name]' %><br />
+  Company Email
+  <%= text_field_tag :company_email, '', name: 'user[client_attributes][company_email]' %><br />
+  Official Website
+  <%= text_field_tag :official_website, '', name: 'user[client_attributes][official_website]' %><br />
+  Country <%= country_select("user", "country", {selected: "US"}, {name: 'user[client_attributes][country_id]'}) %>
+  Zip<%= text_field_tag :zip, '', name: 'user[client_attributes][zip]' %><br />
+  Term and Condition <%= check_box_tag :accept, 'yes', false, name: 'user[terms_of_service]' %><br />
+</div>
+
+<script>
+  $("#company_name").rules('add', {
+    required: true,
+    messages: {
+      required: "Enter Company Name"
+    }
+  });
+  
+  $("#company_email").rules('add', {
+    required: true,
+    email: true,
+    messages: {
+      required: "Enter Company email",
+      email: "Please Enter a valid email"
+    }
+  });
+
+  $("#official_website").rules('add', {
+    required: true,
+    messages: {
+      required: "Enter Official Website"
+    }
+  });
+
+
+  $("#zip").rules('add', {
+    required: true,
+    messages: {
+        required: "Enter Zip Code"
+    }
+  });
+
+  $("#accept").rules('add', {
+    required: true,
+    messages: {
+      required: "Please Accept Terms & Conditions"
+    }
+  });
+</script>
+
