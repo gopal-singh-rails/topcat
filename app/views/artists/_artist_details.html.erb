@@ -2,7 +2,7 @@
   <%= text_field_tag :full_name, '', name: 'user[artist_attributes][full_name]', class: 'form-control', placeholder: "Artist Name" %>
 </div>
 <div class="form-group">
-  <%=select_tag "music_genre", '<option>abc</option><option>bcd</option>'.html_safe, name: 'user[artist_attributes][music_genre]', class: 'form-control'  %>
+  <%=select_tag "music_genre", '<option>Music_Genre</option><option>Music_Genre1</option>'.html_safe, name: 'user[artist_attributes][music_genre]', class: 'form-control'  %>
 </div>
 <div class="form-group">
   <%= country_select("user", "country", {selected: "US"}, {name: 'user[artist_attributes][country_id]', class: 'form-control'})%>

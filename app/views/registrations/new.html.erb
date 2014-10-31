@@ -1,4 +1,5 @@
 <div class="container top-space">
+  <h3 class="text-center">Join TopCat For Free</h3>
   <div class="row">
     <div class="col-md-12">
       <div class="well login-box">
@@ -13,9 +14,9 @@
             </div>
           </div>
           <div class='second-step display-none'>
-            <a href="#" class='btn btn-primary user-type', data-value='artist'>Artist <%= radio_button_tag 'user_type', 'Artist'%></a>
-            <a href="#" class='btn btn-primary user-type', data-value='band'>Band <%= radio_button_tag 'user_type', 'Band'%></a>
-            <a href="#" class='btn btn-primary user-type', data-value='client'>Client <%= radio_button_tag 'user_type', 'Client'%></a>
+            <a href="#" class='btn btn-primary user-type form-control margin-bottom-10', data-value='artist'>Artist <%= radio_button_tag 'user_type', 'Artist' %></a>
+            <a href="#" class='btn btn-primary user-type form-control margin-bottom-10', data-value='band'>Band <%= radio_button_tag 'user_type', 'Band'%></a>
+            <a href="#" class='btn btn-primary user-type form-control margin-bottom-10', data-value='client'>Client <%= radio_button_tag 'user_type', 'Client'%></a>
             <a href="#" class="back_link">« Edit Login Information</a>
             <%= hidden_field_tag :user_role, id: "user_role" %>
           </div>

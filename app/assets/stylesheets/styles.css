@@ -179,3 +179,15 @@ body {
   margin:0;
   font-weight:300;
 }
+
+.margin-bottom-10{
+  margin-bottom: 10px;
+}
+
+.second-step input[type="radio"]{
+  display: none;
+}
+
+.error{
+  color: red;
+}

@@ -53,6 +53,7 @@ GEM
       warden (~> 1.2.3)
     erubis (2.7.0)
     execjs (2.2.2)
+    gritter (1.1.0)
     hike (1.2.3)
     i18n (0.6.11)
     jbuilder (2.2.4)
@@ -77,6 +78,7 @@ GEM
     mime-types (2.4.3)
     minitest (5.4.2)
     multi_json (1.10.1)
+    nprogress-rails (0.1.6.3)
     orm_adapter (0.5.0)
     pg (0.17.1)
     pry (0.10.1)
@@ -156,10 +158,12 @@ DEPENDENCIES
   countries
   country_select
   devise
+  gritter
   jbuilder (~> 2.0)
   jquery-rails
   jquery-validation-rails
   less-rails
+  nprogress-rails
   pg
   pry
   rails (= 4.1.6)
