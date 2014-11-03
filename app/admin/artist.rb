@@ -1,15 +1,7 @@
 ActiveAdmin.register Artist do
 
-
-  # See permitted parameters documentation:
-  # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-  #
-  # permit_params :list, :of, :attributes, :on, :model
-  #
-  # or
-  #
   permit_params do
-    permitted = [:artist, :full_name, :music_genre, :zip, :country_id]
+    permitted = [:artist, :full_name, :music_genre, :zip, :country_id, :user_id]
   end
   
   form do |f|
@@ -17,12 +9,32 @@ ActiveAdmin.register Artist do
       f.input :user, :collection => User.all.map{|u| [u.email, u.id]}
       f.input :full_name
       f.input :music_genre
-      f.select :country_id, collection: Country.all,label: "Country"
+      f.input :country_id, as: 'select', collection: Country.all,label: "Country"
       f.input :zip
     end
     f.actions
   end
-
-
-
+  
+  show do |artist|
+    attributes_table do
+      row :id
+      row :full_name
+      row :user_id
+      row :music_genre
+      row :country_id
+      row :created_at
+    end
+  end
+  
+  index do
+    column :id
+    column :full_name
+    column :user_id do |artist|
+      artist.user.email
+    end
+    column :music_genre
+    column :country_id
+    column :created_at
+    actions
+  end
 end
