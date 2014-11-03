@@ -1,10 +1,3 @@
-<% unless flash[:alert].blank? %>
-  <script>
-    <%= extend_gritter :time => 5000, :position => :top_left, :sticky => true%>
-    <%= add_gritter("#{flash[:alert]}", :image => :error, :title => "Please pay attention!") %>
-  </script>
-<% end %>
-
 <div class="container top-space">
   <h3 class="text-center">Secure Login to TomCat</h3>
   <div class="row">
@@ -13,6 +6,9 @@
         <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
           <div class="form-group">
             <%= f.email_field :email, autofocus: true, placeholder: 'Email', class: "form-control" %>
+            <% unless flash[:alert].blank? %>
+              <label for="user_email" class="error"><%= flash[:alert]%></label>
+            <% end %>
           </div>
           <div class="form-group">
             <%= f.password_field :password, autocomplete: "off", placeholder: 'Password', class: "form-control" %>
