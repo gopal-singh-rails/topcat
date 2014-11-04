@@ -6,7 +6,7 @@ ActiveAdmin.register Client do
   
   form do |f|
     f.inputs "Client" do
-      f.input :user, :collection => User.all.map{|u| [u.email, u.id]}
+      f.input :user, :collection => User.not_assign_user.map{|u| [u.email, u.id]}
       f.input :company_name
       f.input :company_email
       f.input :official_website

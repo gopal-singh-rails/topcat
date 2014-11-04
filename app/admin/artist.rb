@@ -6,7 +6,7 @@ ActiveAdmin.register Artist do
   
   form do |f|
     f.inputs "Artist" do
-      f.input :user, :collection => User.all.map{|u| [u.email, u.id]}
+      f.input :user, :collection => User.not_assign_user.map{|u| [u.email, u.id]}
       f.input :full_name
       f.input :music_genre
       f.input :country_id, as: 'select', collection: Country.all,label: "Country"

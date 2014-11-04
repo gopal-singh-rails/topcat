@@ -12,9 +12,13 @@ ActiveAdmin.register User do
   end
   
   index do
+    selectable_column
     column :id
     column :email
-    actions
+    column :approve_status
+    actions do |user|
+      link_to 'Approve', approve_admin_user_path(user) if user.pending?
+    end
   end
   
   show do |user|
@@ -32,4 +36,15 @@ ActiveAdmin.register User do
     end
     f.actions
   end
+
+  batch_action :approve do |selection|
+    User.approve_user(params[:collection_selection])
+    redirect_to admin_users_path, notice: 'Users has been approved'
+  end
+
+  member_action :approve do
+    User.approve_user([params[:id]])
+    redirect_to admin_users_path, notice: 'User has been approved'
+  end
+
 end

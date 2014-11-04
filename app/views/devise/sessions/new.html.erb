@@ -5,7 +5,7 @@
       <div class="well login-box">
         <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
           <div class="form-group">
-            <%= f.email_field :email, autofocus: true, placeholder: 'Email', class: "form-control" %>
+            <%= f.email_field :email, autofocus: true, placeholder: 'Email', class: "form-control"%>
             <% unless flash[:alert].blank? %>
               <label for="user_email" class="error"><%= flash[:alert]%></label>
             <% end %>

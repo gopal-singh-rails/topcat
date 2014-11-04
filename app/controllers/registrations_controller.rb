@@ -18,7 +18,7 @@ class RegistrationsController < Devise::RegistrationsController
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) do |u|
-      u.permit(:email, :password, :terms_of_service,
+      u.permit(:email, :password, :terms_of_service, :user_type,
                 artist_attributes: [:full_name, :zip, :music_genre, :country_id],
                 band_attributes: [:band_name, :zip, :music_genre, :country_id],
                 client_attributes: [:company_name, :company_email, :official_website, :zip, :country_id]

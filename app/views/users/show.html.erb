@@ -1,0 +1,22 @@
+<div class="col-md-12">
+  <% unless current_user.approved? %>
+    <p class="notice alert alert-alert text-center">Your account is under review</p>
+  <% end %>
+</div>    
+<div class="col-md-12 margin-top-20">
+  <div class="col-md-2"><%= image_tag "missing.jpg" %></div>
+  <% if current_user.artist? %>
+    <%= render partial: 'artists/artist_primary_info' %>
+    <%= render partial: 'artists/artist_secondry_info' if current_user.approved? %>
+  <% end %>
+
+  <% if current_user.band? %>
+    <%= render partial: 'bands/band_primary_info' %>
+    <%= render partial: 'bands/band_secondry_info' if current_user.approved? %>
+  <% end %>
+
+  <% if current_user.client? %>
+    <%= render partial: 'clients/client_primary_info' %>
+    <%= render partial: 'clients/client_secondry_info' if current_user.approved? %>
+  <% end %>
+<div>
