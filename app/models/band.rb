@@ -1,6 +1,6 @@
 class Band < ActiveRecord::Base
   belongs_to :user
-  validates :band_name, :zip, :music_genre, :country_id, :user_id, presence: true
+  validates :band_name, :zip, :music_genre, :country_id, presence: true
   after_create :assign_role
 
   protected
