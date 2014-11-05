@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
 
   delegate :company_name, to: :client, prefix: :client
   delegate :company_email, to: :client, prefix: :client
-  delegate :company_email, to: :client, prefix: :client
+  delegate :official_website, to: :client, prefix: :client
 
   def self.approve_user(users_id)
     users = User.where("id in(?)", users_id)
