@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   get 'welcome/index'
 
-  resources :users do
+  resources :users, path: 'myuser' do
     collection do
       get 'check_user_assign'
     end

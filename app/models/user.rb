@@ -11,6 +11,9 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :artist, :band, :client
   validates :terms_of_service, acceptance: { accept: 'yes' }
 
+  has_attached_file :profile_pic, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "missing.jpg"
+  validates_attachment_content_type :profile_pic, :content_type => /\Aimage\/.*\Z/, :less_than => 1.megabytes
+
   scope :not_assign_user, -> { where(user_type: 0)}
 
   delegate :full_name, to: :artist, prefix: :artist
