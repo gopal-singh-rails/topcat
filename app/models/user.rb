@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   validates :terms_of_service, acceptance: { accept: 'yes' }
 
   has_attached_file :profile_pic, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "missing.jpg"
+  
   validates_attachment_content_type :profile_pic, :content_type => /\Aimage\/.*\Z/, :less_than => 1.megabytes
 
   scope :not_assign_user, -> { where(user_type: 0)}

@@ -39,6 +39,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',        group: :development
 gem 'pry',        group: :development
 gem 'paperclip'
+gem 'jplayer-rails'
 
 
 # Use ActiveModel has_secure_password

@@ -10,9 +10,9 @@
 
 <%= render :partial => '/shared/header' %>
 
-<%= js add_gritter(flash[:notice], :image => :notice, :title => "Pay attention!", :position => :top_left ) %>
-<%= js add_gritter(flash[:success], :image => :success, :title => "Message"), :position => :top_left %>
-<%= js add_gritter(flash[:error], :image => :error, :title => "Pay attention!", :position => :top_left) %>
+<%= js add_gritter(flash[:notice], :image => :notice, :title => "Pay attention!") %>
+<%= js add_gritter(flash[:success], :image => :success, :title => "Message") %>
+<%= js add_gritter(flash[:error], :image => :error, :title => "Pay attention!") %>
 <%#= extend_gritter :time => 500, :position => :top_left  %>
 
 <%= yield %>
