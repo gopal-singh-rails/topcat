@@ -5,9 +5,14 @@ class User < ActiveRecord::Base
   enum user_type: [:not_assign, :artist, :band, :client]
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+ 
   has_one :artist, dependent: :destroy
   has_one :client, dependent: :destroy
   has_one :band, dependent: :destroy
+  has_many :sent_messages, :class_name => 'Message', :foreign_key=> 'sender_id'
+  has_many :received_messages, :class_name => 'Message', :foreign_key=> 'receiver_id'
+ 
+ 
   accepts_nested_attributes_for :artist, :band, :client
   validates :terms_of_service, acceptance: { accept: 'yes' }
 
