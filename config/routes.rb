@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   end
 
   get 'welcome/index'
+  get 'artist/:id/audio' => "users#audio", as: :artist_audio
 
   resources :users, path: 'myuser' do
     collection do
