@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :users, path: 'myuser' do
     collection do
       get 'check_user_assign'
+      post 'upload_audio'
     end
   end
 
