@@ -25,11 +25,12 @@ class UsersController < ApplicationController
         song = current_band.songs.new(audio_params)
       end
       if song.save
-        redirect_to artist_audio_path(current_user), message: "song has been uploaded. It will appear in your list after approve by our staff."
+        flash[:message] = "song has been uploaded. It will appear in your list after approve by our staff."
+      else
+        flash[:error] = song.errors.full_messages.join("<br/>")
       end
+      redirect_to artist_audio_path(current_user)
     end
-    flash[:error] = song.errors.full_messages.join("<br/>")
-    redirect_to artist_audio_path(current_user)
   end
 
   private
