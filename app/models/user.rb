@@ -11,9 +11,21 @@ class User < ActiveRecord::Base
   has_one :band, dependent: :destroy
   has_many :sent_messages, :class_name => 'Message', :foreign_key=> 'sender_id'
   has_many :received_messages, :class_name => 'Message', :foreign_key=> 'receiver_id'
-  
+    
   def messages
     sent_messages + received_messages
+  end
+  
+  def conversations(user_id)
+    Message.where("(sender_id=? and receiver_id=?) or (sender_id=? and receiver_id=?)", user_id, self.id, self.id, user_id).order('created_at')
+  end
+  
+  def all_conversations
+    result = {}
+    sent_messages.pluck(:receiver_id).uniq.each do |user_id|
+      result[user_id] = conversations(user_id)
+    end
+    result
   end
  
   accepts_nested_attributes_for :artist, :band, :client
