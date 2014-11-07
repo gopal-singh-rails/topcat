@@ -131,6 +131,7 @@ body {
     width:300px;
     margin:0 auto;
 }
+
 .well.login-box legend {
   font-size:26px;
   text-align:center;
@@ -198,4 +199,10 @@ body {
 
 .error{
   color: red;
+}
+
+
+.well.message-box {
+    width:500px;
+    margin:0 auto;
 }
