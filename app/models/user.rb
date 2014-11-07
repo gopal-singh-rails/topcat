@@ -11,7 +11,10 @@ class User < ActiveRecord::Base
   has_one :band, dependent: :destroy
   has_many :sent_messages, :class_name => 'Message', :foreign_key=> 'sender_id'
   has_many :received_messages, :class_name => 'Message', :foreign_key=> 'receiver_id'
- 
+  
+  def messages
+    sent_messages + received_messages
+  end
  
   accepts_nested_attributes_for :artist, :band, :client
   validates :terms_of_service, acceptance: { accept: 'yes' }

@@ -1,0 +1,8 @@
+<br><br><br><br>
+<%@messages.each do |message| %>
+  <%= message.sender_id == current_user.id ? "Me" : message.sender.email %>
+  Message <%=message.content%>
+<br>
+<%end%>
+
+<%=link_to "Send Message", new_message_path %>
