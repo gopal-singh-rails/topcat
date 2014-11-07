@@ -35,3 +35,38 @@
   font-size: 15px;
   line-height: 1.4;
 }
+
+.audio-playlist{
+  a{
+    &:hover{
+      text-decoration: none;
+    }
+  }
+  p{
+    height: 30px;
+    line-height: 2;
+    padding: 0 1%;
+    &:hover{
+      background-color: #B3B3B3;
+      color: #FFFFFF;
+    }
+    i{
+      margin-right: 2%;
+    }
+  }
+}
+
+.margin-bottom-20{
+  margin-bottom: 20px;
+}
+
+#jp_container_1{
+  margin-bottom: 50px;
+}
+
+#s_list{
+  cursor: pointer;
+  height: 10px;
+  margin-top: -6px;
+  width: 10px;
+}

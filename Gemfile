@@ -40,6 +40,7 @@ gem 'spring',        group: :development
 gem 'pry',        group: :development
 gem 'paperclip'
 gem 'jplayer-rails'
+gem "font-awesome-rails"
 
 
 # Use ActiveModel has_secure_password

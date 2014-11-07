@@ -14,7 +14,7 @@ class UsersController < ApplicationController
     user = current_user.artist? ? current_artist : current_band
     songlist = {}
     user.songs.map{|song| songlist.merge!(song.audio_file.url => song.audio_file_file_name )}
-    @songlist = songlist.to_json
+    @songlist = songlist
   end
 
   def upload_audio

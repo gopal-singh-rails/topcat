@@ -1,29 +1,29 @@
-<div id="jquery_jplayer_1" class="jp-jplayer"></div>
+<div id="jquery_jplayer_1" class="jp-jplayer margin-bottom-20"></div>
   <div class="col-md-4">
     <div id="jp_container_1" class="jp-audio">
       <div class="jp-type-playlist">
         <div class="jp-gui jp-interface">
           <div class="col-md-12">
-              <ul class="jp-controls">
-                <li><a href="javascript:;" class="jp-previous" tabindex="1">previous</a></li>
-                <li><a href="javascript:;" class="jp-play" tabindex="1">play</a></li>
-                <li><a href="javascript:;" class="jp-pause" tabindex="1">pause</a></li>
-                <li><a href="javascript:;" class="jp-next" tabindex="1">next</a></li>
-                <li><a href="javascript:;" class="jp-stop" tabindex="1">stop</a></li>
-              </ul>
-              <div class="jp-progress">
-                <div class="jp-seek-bar">
-                  <div class="jp-play-bar"></div>
-                </div>
+            <ul class="jp-controls">
+              <li><a href="javascript:;" class="jp-previous" tabindex="1">previous</a></li>
+              <li><a href="javascript:;" class="jp-play" tabindex="1">play</a></li>
+              <li><a href="javascript:;" class="jp-pause" tabindex="1">pause</a></li>
+              <li><a href="javascript:;" class="jp-next" tabindex="1">next</a></li>
+              <li><a href="javascript:;" class="jp-stop" tabindex="1">stop</a></li>
+            </ul>
+            <div class="jp-progress">
+              <div class="jp-seek-bar">
+                <div class="jp-play-bar"></div>
               </div>
-              <div class="jp-volume-bar">
-                <div class="jp-volume-bar-value"></div>
-              </div>
-              <div class="jp-time-holder">
-                <div class="jp-current-time"></div>
-                <div class="jp-duration"></div>
-              </div>
-
+            </div>
+            <div class="jp-volume-bar">
+              <div class="jp-volume-bar-value"></div>
+            </div>
+            <div class="jp-time-holder">
+              <div class="jp-current-time"></div>
+              <div class="jp-duration"></div>
+            </div>
+            <div id="s_list">  <i class="fa fa-th-list"></i> </div>
           </div>
         </div>
         <div class="jp-playlist">
@@ -40,7 +40,7 @@
   </div>  
 <script>
   $(document).ready(function(){
-
+    $("#jp_container_1 .jp-playlist").hide()
     var cssSelector = { jPlayer: "#jquery_jplayer_1", cssSelectorAncestor: "#jp_container_1" };
     var playlist = []; // Empty playlist
     var options = { swfPath: "js", supplied: "mp3", autoPlay: false };
@@ -52,6 +52,34 @@
         mp3: url
       });
     }
+
+    $(".song-play").on('click', function(){
+      _this = $(this)
+      if(_this.hasClass('active-song')){
+        myPlaylist.pause()
+        $(".audio-playlist").removeClass('active-song')
+        $(".audio-playlist i").removeClass('fa-pause')
+        $(".audio-playlist i").addClass('fa-play')
+        $(".audio-playlist").find('.song-play').removeClass('active-song')
+      }else{
+        _this.addClass("active-song")
+        myPlaylist.play($(this).data('song-number'));
+        $(".audio-playlist i").removeClass('fa-pause');
+        $(".audio-playlist i").addClass('fa-play');
+        _this.find('i').addClass('fa-pause');
+      }
+    })
+
+    $("#s_list").on('click', function(){
+      if ($(this).hasClass('open')){
+        $(".jp-playlist").hide()
+        $(this).removeClass('open')
+      }
+      else{
+        $(this).addClass('open')
+        $(".jp-playlist").show()
+      }
+    })
     
   });
 

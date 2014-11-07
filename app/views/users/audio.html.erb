@@ -7,6 +7,7 @@
       <%= form.submit "Upload Song" %>
     <% end %>
   </div>
-  <div class="songs_list", data-songs-list="<%= @songlist %>"></div>
+  <div class="songs_list", data-songs-list="<%= @songlist.to_json %>"></div>
+  <%= render partial: 'shared/songlist', locals:{songs: @songlist} %>
   <%= render partial: 'shared/audio_player' %>
 <% end %>  
