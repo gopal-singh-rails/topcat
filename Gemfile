@@ -42,7 +42,7 @@ gem 'paperclip'
 gem 'jplayer-rails'
 gem "font-awesome-rails"
 gem "video_info"
-
+gem 'friendly_id'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

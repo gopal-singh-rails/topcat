@@ -86,6 +86,8 @@ GEM
     formtastic (3.0.0)
       actionpack (>= 3.2.13)
     formtastic_i18n (0.1.1)
+    friendly_id (5.0.4)
+      activerecord (>= 4.0.0)
     gritter (1.1.0)
     has_scope (0.6.0.rc)
       actionpack (>= 3.2, < 5)
@@ -225,6 +227,7 @@ DEPENDENCIES
   country_select
   devise
   font-awesome-rails
+  friendly_id
   gritter
   jbuilder (~> 2.0)
   jplayer-rails

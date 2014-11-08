@@ -1,6 +1,9 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
+  # :confirmable, :lockable, :timeoutable and :omniauthable.
+  extend FriendlyId
+  friendly_id :name, use: :slugged
+
   enum approve_status: [:pending, :approved]
   enum user_type: [:not_assign, :artist, :band, :client]
   devise :database_authenticatable, :registerable,
@@ -28,6 +31,12 @@ class User < ActiveRecord::Base
     result
   end
  
+  def name
+    return self.artist.full_name if self.artist
+    return self.band.band_name if self.band
+    return self.client.company_name if self.client
+  end
+
   accepts_nested_attributes_for :artist, :band, :client
   validates :terms_of_service, acceptance: { accept: 'yes' }
 
@@ -47,7 +56,7 @@ class User < ActiveRecord::Base
   delegate :official_website, to: :client, prefix: :client
 
   def self.approve_user(users_id)
-    users = User.where("id in(?)", users_id)
+    users = User.friendly.where("slug in(?)", users_id)
     users.each do |user|
       user.update_attributes(approve_status: 1)
     end
