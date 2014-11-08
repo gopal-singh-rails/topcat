@@ -4,15 +4,12 @@
     <% unless current_user.approved? %>
       <p class="notice alert alert-alert text-center">Your account is under review</p>
     <% end %>
-  </div>    
+  </div>
   <div class="col-md-12 margin-top-20">
     <div class="col-md-2">
-      <%= form_for(current_user, :url => user_path(current_user), method: :put, :html => { :multipart => true }) do |form| %>
-        <%= image_tag form.object.profile_pic.url(:thumb) %>
-        <%= form.file_field :profile_pic %>
-        <%= form.submit "Upload" %>
-      <% end %>
+      <%= image_tag current_user.profile_pic.url(:thumb) %>
     </div>
+    <p> <%= link_to "Profile Settings", edit_user_path(current_user), class: 'btn btn-primary' %> </p>
     <% if current_user.artist? %>
       <%= render partial: 'artists/artist_primary_info' %>
       <%= render partial: 'artists/artist_secondry_info' if current_user.approved? %>

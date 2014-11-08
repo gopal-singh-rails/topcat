@@ -1,12 +1,6 @@
 <%= render partial: 'profile' %>
 <% if current_user.approved? %>
   <%= render partial: 'shared/profile_tabs' %>
-  <div class="col-md-12">
-    <%= form_for(current_user, :url => upload_audio_users_path, method: :post, :html => { :multipart => true }) do |form| %>
-      <%= form.file_field :audio_file %>
-      <%= form.submit "Upload Song" %>
-    <% end %>
-  </div>
   <div class="songs_list", data-songs-list="<%= @songlist.to_json %>"></div>
   <%= render partial: 'shared/songlist', locals:{songs: @songlist} %>
   <%= render partial: 'shared/audio_player' %>

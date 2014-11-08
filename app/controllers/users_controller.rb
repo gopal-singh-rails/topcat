@@ -4,6 +4,10 @@ class UsersController < ApplicationController
   def show
   end
 
+  def edit
+    @user = current_account
+  end
+
   def update
     user = current_user
     user.update_attributes(profile_pic: user_params["profile_pic"])
@@ -61,7 +65,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:profile_pic, :audio_file)
+    params.require(:user).permit(:profile_pic, :audio_file, )
   end
 
   def audio_params

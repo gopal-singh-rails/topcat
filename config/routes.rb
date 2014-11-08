@@ -21,6 +21,11 @@ Rails.application.routes.draw do
   end
   
   resources :messages
+  resources :artists
+  resources :clients
+  resources :bands
+
+  get '/songs' => "audio#index", as: :my_songs
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
