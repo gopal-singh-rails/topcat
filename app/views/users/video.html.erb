@@ -1,0 +1,11 @@
+<%= render partial: 'profile' %>
+<% if current_user.approved? %>
+  <%= render partial: 'shared/profile_tabs' %>
+  <div class="col-md-12 margin-top-10">
+    <%= form_for(@video, :url => upload_video_users_path, method: :post) do |form| %>
+      <%= form.text_field :video_url %>
+      <%= form.submit "Save", class: 'btn btn-primary active' %>
+    <% end %>
+  </div>
+<% end %>
+<%= render partial: 'shared/video_list', locals:{videos: @videos} %>

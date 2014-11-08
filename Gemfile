@@ -41,6 +41,7 @@ gem 'pry',        group: :development
 gem 'paperclip'
 gem 'jplayer-rails'
 gem "font-awesome-rails"
+gem "video_info"
 
 
 # Use ActiveModel has_secure_password

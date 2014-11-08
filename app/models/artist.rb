@@ -1,6 +1,8 @@
 class Artist < ActiveRecord::Base
   belongs_to :user
   has_many :songs, as: :songable
+  has_many :videos, as: :videoable
+  
   validates :full_name, :zip, :music_genre, :country_id, presence: true
 
   after_create :assign_role

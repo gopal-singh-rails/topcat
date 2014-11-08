@@ -3,7 +3,7 @@
   <ul class="nav nav-tabs" role="tablist">
     <li role="presentation" class="<%= active_class(user_path(current_user)) %>" > <%= link_to "Overview", user_path(current_user) %> </li>
     <li role="presentation" class="<%= active_class(artist_audio_path(current_user)) %>"> <%= link_to "Music", artist_audio_path(current_user) %> </li>
-    <li role="presentation"><a href="#">Video</a></li>
+    <li role="presentation" class="<%= active_class(artist_video_path(current_user)) %>"><%= link_to "Video", artist_video_path(current_user) %></li>
     <li role="presentation"><a href="#">Gallery</a></li>
     <li role="presentation"><a href="#">Events</a></li>
     <li role="presentation"><a href="#">Ratings</a></li>

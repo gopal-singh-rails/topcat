@@ -10,11 +10,13 @@ Rails.application.routes.draw do
 
   get 'welcome/index'
   get 'artist/:id/audio' => "users#audio", as: :artist_audio
+  get 'artist/:id/video' => "users#video", as: :artist_video
 
-  resources :users, path: 'myuser' do
+  resources :users, path: 'profile' do
     collection do
       get 'check_user_assign'
       post 'upload_audio'
+      post 'upload_video'
     end
   end
   

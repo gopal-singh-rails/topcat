@@ -17,6 +17,31 @@ class UsersController < ApplicationController
     @songlist = songlist
   end
 
+  def video
+    user = current_user.artist? ? current_artist : current_band
+    @videos = user.videos
+    @video = Video.new
+  end
+
+  def upload_video
+    user = current_user.artist? ? current_artist : current_band
+    @video = user.videos.new( video_params)
+    video_info = VideoInfo.new(video_params[:video_url])
+    if video_info.available?
+       @video.video_image_url = video_info.thumbnail_medium 
+      if @video.save
+        flash[:message] = "Uploaded url"
+        redirect_to artist_video_path(user)
+      else
+        flash[:error] = "Error: #{@video.errors.full_messages.join(", ")}"
+        render "video"
+      end
+    else
+      flash[:Error] = "Uploaded url is not available."
+      redirect_to artist_video_path(user)
+    end
+  end
+
   def upload_audio
     if current_user.artist? or current_user.band?
       if current_user.artist?
@@ -41,6 +66,10 @@ class UsersController < ApplicationController
 
   def audio_params
     params.require(:user).permit(:audio_file)
+  end
+
+  def video_params
+    params.require(:video).permit(:video_url, :video_image_url)
   end
   
 end
