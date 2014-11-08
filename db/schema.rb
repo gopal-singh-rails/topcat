@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141106051828) do
+ActiveRecord::Schema.define(version: 20141108075326) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,10 +83,23 @@ ActiveRecord::Schema.define(version: 20141106051828) do
     t.datetime "updated_at"
   end
 
+  create_table "friendly_id_slugs", force: true do |t|
+    t.string   "slug",                      null: false
+    t.integer  "sluggable_id",              null: false
+    t.string   "sluggable_type", limit: 50
+    t.string   "scope"
+    t.datetime "created_at"
+  end
+
+  add_index "friendly_id_slugs", ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true, using: :btree
+  add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
+  add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
+  add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
+
   create_table "messages", force: true do |t|
     t.integer  "sender_id"
     t.integer  "receiver_id"
-    t.boolean  "is_read"
+    t.boolean  "is_read",     default: false
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -101,6 +114,7 @@ ActiveRecord::Schema.define(version: 20141106051828) do
     t.string   "audio_file_content_type"
     t.integer  "audio_file_file_size"
     t.datetime "audio_file_updated_at"
+    t.boolean  "is_approved",             default: false
   end
 
   create_table "users", force: true do |t|
@@ -122,9 +136,20 @@ ActiveRecord::Schema.define(version: 20141106051828) do
     t.string   "profile_pic_content_type"
     t.integer  "profile_pic_file_size"
     t.datetime "profile_pic_updated_at"
+    t.string   "slug"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "videos", force: true do |t|
+    t.integer  "videoable_id"
+    t.string   "videoable_type"
+    t.string   "video_url"
+    t.string   "video_image_url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "is_approved",     default: false
+  end
 
 end

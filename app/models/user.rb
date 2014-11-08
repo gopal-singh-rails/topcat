@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
   
   def all_conversations
     result = {}
-    sent_messages.pluck(:receiver_id).uniq.each do |user_id|
+    messages.map(&:receiver_id).uniq.each do |user_id|
       result[user_id] = conversations(user_id)
     end
     result

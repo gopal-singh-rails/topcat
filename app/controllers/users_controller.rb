@@ -59,7 +59,7 @@ class UsersController < ApplicationController
   end
   
   def email_list
-    suggestions = User.where("email ilike ?", "#{params[:query]}%").limit(5)
+    suggestions = User.where("email ilike ? and user_type in (?)", "#{params[:query]}%", [1,2]).limit(5)
     render json: {suggestions: suggestions}
   end
 
