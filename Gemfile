@@ -16,6 +16,7 @@ gem 'devise'
 gem 'countries'
 gem 'country_select'
 gem 'activeadmin', github: 'activeadmin'
+gem 'twitter-typeahead-rails'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 
