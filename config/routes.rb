@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
   resources :users, path: 'profile' do
     collection do
+      get 'email_list'
       get 'check_user_assign'
       post 'upload_audio'
       post 'upload_video'

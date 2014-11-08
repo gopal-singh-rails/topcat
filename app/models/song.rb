@@ -12,6 +12,14 @@ class Song < ActiveRecord::Base
 
   validates_attachment_size :audio_file, :less_than => 5.megabytes
   
+
+   
+  def self.approve_unapprove_song(songs_id)
+    songs = Song.where("id in(?)", songs_id)
+    songs.each do |song|
+      song.update_attributes(is_approved: !song.is_approved)
+    end
+  end
 end
 
 #http://stackoverflow.com/questions/10134927/playing-song-in-jplayer-that-was-uploaded-via-paperclip-ruby-on-rails-jquery

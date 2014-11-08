@@ -18,6 +18,7 @@
 //= require turbolinks
 //= require nprogress
 //= require nprogress-turbolinks
+//= require twitter/typeahead.min
 //= require_tree .
 
 NProgress.configure({

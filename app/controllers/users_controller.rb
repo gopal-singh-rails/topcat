@@ -61,6 +61,11 @@ class UsersController < ApplicationController
       redirect_to artist_audio_path(current_user)
     end
   end
+  
+  def email_list
+    suggestions = User.where("email ilike ? and user_type in (?)", "#{params[:query]}%", [1,2]).limit(5)
+    render json: {suggestions: suggestions}
+  end
 
   private
 
