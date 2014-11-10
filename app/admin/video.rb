@@ -6,10 +6,10 @@ ActiveAdmin.register Video do
   index do
     column :id
     column "Email" do |video|
-      link_to video.videoable.email, admin_user_path(video.videoable_id)
+      link_to video.videoable.user.email, admin_user_path(video.videoable_id)
     end
     column "User Type" do |video|
-      video.videoable.user_type.capitalize
+      video.videoable_type.capitalize
     end
     column "Url" do |video|
       video.video_url

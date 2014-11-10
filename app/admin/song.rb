@@ -5,13 +5,13 @@ actions :all, except: [:new, :show, :create, :edit, :update]
   index do
     column :id
     column "Email" do |song|
-      song.songable.email
+      song.songable.user.email
     end
     column "User Type" do |song|
-      song.songable.user_type.capitalize
+      song.songable_type.capitalize
     end
     column "Audio File" do |song|
-      "Audio file code goes here."
+      content_tag(:audio, content_tag(:source, '', src: song.audio_file, type: 'audio/mpeg'), controls: '')
     end
     column :created_at
     column "Approved?" do |song|
