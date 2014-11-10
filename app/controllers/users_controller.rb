@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:audio, :video, :show]
 
   def show
+    @user = User.friendly.find(params[:id])
   end
 
   def edit
@@ -15,34 +16,38 @@ class UsersController < ApplicationController
   end
 
   def audio
-    user = current_user.artist? ? current_artist : current_band
+    @user = User.friendly.find(params[:id])
+    account = @user.artist || @user.band || @user.client
+
+    user = account || current_account
     songlist = {}
-    user.songs.map{|song| songlist.merge!(song.audio_file.url => song.audio_file_file_name )}
+    user.approved_songs.map{|song| songlist.merge!(song.audio_file.url => song.audio_file_file_name )}
     @songlist = songlist
   end
 
   def video
-    user = current_user.artist? ? current_artist : current_band
-    @videos = user.videos
+    @user = User.friendly.find(params[:id])
+    account = @user.artist || @user.band || @user.client
+    @videos = account.approved_videos
     @video = Video.new
   end
 
   def upload_video
-    user = current_user.artist? ? current_artist : current_band
+    user = current_account
     @video = user.videos.new( video_params)
     video_info = VideoInfo.new(video_params[:video_url])
     if video_info.available?
        @video.video_image_url = video_info.thumbnail_medium 
       if @video.save
         flash[:message] = "Uploaded url"
-        redirect_to artist_video_path(user)
+        redirect_to videos_path
       else
         flash[:error] = "Error: #{@video.errors.full_messages.join(", ")}"
-        render "video"
+        render "videos/index"
       end
     else
       flash[:Error] = "Uploaded url is not available."
-      redirect_to artist_video_path(user)
+      redirect_to videos_path
     end
   end
 
@@ -58,7 +63,7 @@ class UsersController < ApplicationController
       else
         flash[:error] = song.errors.full_messages.join("<br/>")
       end
-      redirect_to artist_audio_path(current_user)
+      redirect_to my_songs_path
     end
   end
   

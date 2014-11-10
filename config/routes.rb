@@ -25,6 +25,8 @@ Rails.application.routes.draw do
   resources :artists
   resources :clients
   resources :bands
+  resources :audio
+  resources :videos
 
   get '/songs' => "audio#index", as: :my_songs
 

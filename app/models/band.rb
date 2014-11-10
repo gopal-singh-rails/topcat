@@ -6,6 +6,14 @@ class Band < ActiveRecord::Base
   validates :band_name, :zip, :music_genre, :country_id, presence: true
   after_create :assign_role
 
+  def approved_videos
+    self.videos.where("is_approved=?", true)    
+  end
+
+  def approved_songs
+    self.songs.where("is_approved=?", true)    
+  end
+
   protected
 
   def assign_role
