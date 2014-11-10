@@ -11,6 +11,10 @@ ActiveAdmin.register User do
     permitted = [:user, :email,:password]
   end
   
+   before_filter :only => [:show, :edit, :update, :destroy] do
+    @user = User.friendly.find(params[:id])
+  end
+  
   index do
     selectable_column
     column :id
