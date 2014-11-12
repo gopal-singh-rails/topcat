@@ -10,8 +10,7 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require bootstrap_and_overrides.css
- *= require gritter.css
+ *= require bootstrap.min
  *= require styles
  *= require nprogress
  *= require custom
@@ -19,5 +18,6 @@
  *= require jplayer.blue.monday
  *= require font-awesome
  *= require typeahed_suggestion.css
+ *= require_directory ./sb-admin
  *= require_self
  */
