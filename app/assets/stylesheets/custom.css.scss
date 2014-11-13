@@ -76,3 +76,10 @@
 .container-fluid{
   min-height: 600px; 
 }
+
+.left-nav{
+  overflow: hidden;
+  li a{
+    color: #999;
+  }
+}

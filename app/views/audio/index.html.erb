@@ -8,11 +8,15 @@
         <%# end %>
         <span><p><%= song.audio_file_file_name %></p>
         <%=content_tag(:audio, content_tag(:source, '', src: song.audio_file, type: 'audio/mpeg'), controls: '') %></span>
+        <% unless song.is_approved %>
+          <p>This song is under review and it will not display on public page until approved by our staff.</p>
+      <% end %>
         <hr>
       </div>
       <div class='col-md-2'>
         <%= link_to "Delete", audio_path(song), class: 'btn btn-danger', method: :delete, data: {confirm: "Are you sure?"} %>
       </div>
+      
     <% end %>
   </div>
 </div>
