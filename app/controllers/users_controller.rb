@@ -17,12 +17,14 @@ class UsersController < ApplicationController
 
   def audio
     @user = User.friendly.find(params[:id])
-    account = @user.artist || @user.band || @user.client
-
-    user = account || current_account
-    songlist = {}
-    user.approved_songs.map{|song| songlist.merge!(song.audio_file.url => song.audio_file_file_name )}
-    @songlist = songlist
+    unless @user.client?
+      account = @user.artist || @user.band || @user.client
+      binding.pry
+      user = account || current_account
+      songlist = {}
+      user.approved_songs.map{|song| songlist.merge!(song.audio_file.url => song.audio_file_file_name )}
+      @songlist = songlist
+    end
   end
 
   def video

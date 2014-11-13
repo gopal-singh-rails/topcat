@@ -14,16 +14,22 @@ class MessagesController < ApplicationController
   
   def create
     receiver = User.find_by_email(params[:message][:receiver])
-    message = Message.create!(sender: current_user, receiver: receiver, content: params[:message][:content])
-    Notification.send_message_notifiction(current_user, receiver, message).deliver
-    flash[:notice] = "Message sent successfully"
+    unless receiver.blank?
+      message = Message.create!(sender: current_user, receiver: receiver, content: params[:message][:content])
+      Notification.send_message_notifiction(current_user, receiver, message).deliver
+      flash[:alert] = "Message sent successfully"
+    else
+      flash[:notice] = "Email #{params[:message][:receiver]} not in our database. please try again"
+    end
     redirect_to messages_path
   end
   
   private
 
   def check_user
-    flash[:alert] = "You havn't permission to access this page."
-    redirect_to root_path unless current_user.client?
+    unless current_user.client?
+      flash[:notice] = "You havn't permission to access this page."
+      redirect_to root_path 
+    end
   end
 end

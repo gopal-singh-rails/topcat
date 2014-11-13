@@ -19,6 +19,12 @@
     <% klass = user_signed_in? ? 'col-md-10' : 'col-md-12' %>
       <div class="<%=klass%>">
         <div class="container-fluid">
+          <%unless flash[:notice].blank? %>
+            <div class="alert alert-danger fade in" role="alert" data-dismiss="alert"><%= flash[:notice] %></div>
+            <%end%>
+            <%unless flash[:alert].blank? %>
+              <div class="alert alert-success fade in" role="alert" data-dismiss="alert"><%= flash[:alert] %></div>
+            <%end%>
           <%= yield %>
         </div>
       <!-- /.container-fluid -->
